@@ -1,3 +1,6 @@
+<p align="center">
+  <img src="warehouse.png" alt="Project concept art" width="500"/>
+</p>
 # 🚀 next_gen_code_warehouse
 
 A futuristic, open-source warehouse system for storing, retrieving, and managing code snippets and reusable components like inventory.
