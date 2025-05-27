@@ -1,0 +1,21 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Virtual environments
+.env/
+.venv/
+env/
+venv/
+
+# Editors & IDEs
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+
+# Logs & misc
+*.log
+
