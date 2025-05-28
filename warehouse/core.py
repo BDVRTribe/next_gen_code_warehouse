@@ -1,3 +1,33 @@
+import os
+import json
+from datetime import datetime
+
+def store_snippet(name, code, language, tags=None, description="", created_by="unknown"):
+    """
+    Store a code snippet in a standardized JSON format.
+    """
+    snippet = {
+        "name": name,
+        "language": language,
+        "tags": tags or [],
+        "description": description,
+        "code": code,
+        "created_by": created_by,
+        "created_at": datetime.utcnow().isoformat() + "Z"
+    }
+
+    # Create directory if it doesn't exist
+    dir_path = os.path.join("snippets", language.lower())
+    os.makedirs(dir_path, exist_ok=True)
+
+    # Save as JSON file using snake_case name
+    file_name = name.lower().replace(" ", "_") + ".json"
+    full_path = os.path.join(dir_path, file_name)
+
+    with open(full_path, "w", encoding="utf-8") as f:
+        json.dump(snippet, f, indent=2)
+
+    print(f"✅ Snippet saved to {full_path}")
 import json
 import os
 
