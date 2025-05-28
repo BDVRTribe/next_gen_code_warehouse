@@ -1,5 +1,7 @@
-> 🚀 A visual, AI-ready warehouse for storing & reusing code like inventory.  
-> 🧠 Built to be modular, collaborative, and addictively useful for devs.  
+> 🚀 A visual, AI-ready warehouse for storing & reusing code like inventory.
+
+> 🧠 Built to be modular, collaborative, and addictively useful for devs.
+ 
 > 🔖 Tags: `#opensource` · `#snippets` · `#ai-ready` · `#modular-tools` · `#python`
 
 
