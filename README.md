@@ -1,3 +1,8 @@
+> 🚀 A visual, AI-ready warehouse for storing & reusing code like inventory.  
+> 🧠 Built to be modular, collaborative, and addictively useful for devs.  
+> 🔖 Tags: `#opensource` · `#snippets` · `#ai-ready` · `#modular-tools` · `#python`
+
+
 <p align="center">
   <img src="warehouse.png" alt="Project concept art" width="500"/>
 </p>
