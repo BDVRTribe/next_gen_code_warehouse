@@ -74,7 +74,22 @@ A truly language-agnostic, intelligent warehouse where:
 > Think: Your own searchable AI-enhanced code brain
 
 ---
+## 🧊 The Rubik’s Engine Concept
 
+Just like a Rubik’s cube begins in disarray but can always be solved with a smart sequence, `next_gen_code_warehouse` will one day feature a **self-organizing engine** that restores order to even the messiest snippet libraries.
+
+Instead of fearing disorganization, we embrace it — because this system will continuously "rotate" your data using smart tagging, refactoring, and AI pattern detection to bring everything back into alignment.
+
+### 🔄 What It Will Do
+
+- **Auto-classify** snippets by language, purpose, and relationships  
+- **Detect and merge** duplicates or similar blocks  
+- **Refactor** and reformat disjointed code using best practices  
+- **Reorganize** your collection dynamically — like solving a cube from chaos to clarity
+
+> _"Messy is fine. Rotation is coming."_ 🧠
+
+___
 ## Join the Mission
 
 We welcome contributors, testers, designers, and feedback. Let's build the warehouse we wish we always had.
