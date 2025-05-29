@@ -1,7 +1,7 @@
 import os
 import json
 from warehouse.core import store_snippet
-from warehouse.validator import validate_snippet_file
+from warehouse.validator import validate_snippet
 
 def list_snippets_by_language(language):
     directory = f"snippets/{language}"
