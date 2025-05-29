@@ -1,5 +1,6 @@
 import os
 import json
+from datetime import datetime
 from warehouse.core import store_snippet
 from warehouse.validator import validate_snippet
 
@@ -33,13 +34,23 @@ def add_snippet_interactively():
         code_lines.append(line)
     code = "\n".join(code_lines)
 
-    snippet = store_snippet(name, code, language, tags, description)
-    print(f"\n✅ Snippet '{name}' saved successfully to 'snippets/{language}/'!")
+    snippet = {
+        "name": name,
+        "language": language,
+        "tags": [tag.strip() for tag in tags],
+        "description": description,
+        "code": code,
+        "created_by": "CLI",
+        "created_at": datetime.utcnow().isoformat() + "Z"
+    }
 
-    # Validate the saved snippet
-    snippet_path = f"snippets/{language}/{name.replace(' ', '_')}.json"
-    print("\n🔍 Validating saved snippet...")
-    validate_snippet_file(snippet_path)
+    valid, message = validate_snippet(snippet)
+    if not valid:
+        print(f"\n❌ Snippet not saved: {message}")
+        return
+
+    store_snippet(name, code, language, tags, description)
+    print(f"\n✅ Snippet '{name}' saved successfully to 'snippets/{language}/'!")
 
 def delete_snippet():
     language = input("Enter language of the snippet to delete: ").strip()
