@@ -1,6 +1,7 @@
 import os
 import json
 from warehouse.core import store_snippet
+from warehouse.validator import validate_snippet_file
 
 def list_snippets_by_language(language):
     directory = f"snippets/{language}"
@@ -35,6 +36,11 @@ def add_snippet_interactively():
     snippet = store_snippet(name, code, language, tags, description)
     print(f"\n✅ Snippet '{name}' saved successfully to 'snippets/{language}/'!")
 
+    # Validate the saved snippet
+    snippet_path = f"snippets/{language}/{name.replace(' ', '_')}.json"
+    print("\n🔍 Validating saved snippet...")
+    validate_snippet_file(snippet_path)
+
 def delete_snippet():
     language = input("Enter language of the snippet to delete: ").strip()
     language_dir = os.path.join("snippets", language)
@@ -65,7 +71,6 @@ def delete_snippet():
     else:
         print("❌ Deletion canceled.")
 
-
 if __name__ == "__main__":
     print("Choose an option:")
     print("1. List snippets by language")
@@ -82,4 +87,3 @@ if __name__ == "__main__":
         delete_snippet()
     else:
         print("❌ Invalid option selected.")
-
