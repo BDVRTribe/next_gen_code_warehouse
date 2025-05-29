@@ -51,6 +51,59 @@ def add_snippet_interactively():
 
     store_snippet(name, code, language, tags, description)
     print(f"\n✅ Snippet '{name}' saved successfully to 'snippets/{language}/'!")
+    
+def update_snippet():
+    language = input("Enter language of the snippet to update: ").strip().lower()
+    language_dir = os.path.join("snippets", language)
+
+    if not os.path.isdir(language_dir):
+        print(f"No snippets found for language: {language}")
+        return
+
+    files = [f for f in os.listdir(language_dir) if f.endswith(".json")]
+    if not files:
+        print(f"No snippets to update in {language}")
+        return
+
+    print(f"\n🛠️ Available snippets in '{language}':")
+    for i, filename in enumerate(files, 1):
+        print(f"{i}. {filename}")
+
+    choice = input("Enter number of snippet to update: ").strip()
+    if not choice.isdigit() or not (1 <= int(choice) <= len(files)):
+        print("Invalid selection.")
+        return
+
+    selected_file = files[int(choice) - 1]
+    file_path = os.path.join(language_dir, selected_file)
+
+    with open(file_path, "r") as file:
+        snippet = json.load(file)
+
+    print("\nPress Enter to keep existing values.")
+    new_name = input(f"Name [{snippet['name']}]: ").strip() or snippet["name"]
+    new_description = input(f"Description [{snippet['description']}]: ").strip() or snippet["description"]
+    new_tags = input(f"Tags (comma-separated) [{', '.join(snippet['tags'])}]: ").strip()
+    new_code_lines = []
+    print("Enter new code (or type END to keep existing):")
+    while True:
+        line = input()
+        if line.strip().upper() == "END":
+            break
+        new_code_lines.append(line)
+
+    if new_tags:
+        snippet["tags"] = [tag.strip() for tag in new_tags.split(",")]
+    if new_code_lines:
+        snippet["code"] = "\n".join(new_code_lines)
+
+    snippet["name"] = new_name
+    snippet["description"] = new_description
+
+    with open(file_path, "w") as file:
+        json.dump(snippet, file, indent=4)
+
+    print(f"✅ Snippet '{new_name}' updated successfully.")
 
 def delete_snippet():
     language = input("Enter language of the snippet to delete: ").strip()
@@ -87,7 +140,8 @@ if __name__ == "__main__":
     print("1. List snippets by language")
     print("2. Add a new snippet")
     print("3. Delete a snippet")
-    choice = input("Enter 1, 2, or 3: ").strip()
+    print("4. Update a snippet")
+    choice = input("Enter 1, 2, 3, or 4: ").strip()
 
     if choice == "1":
         lang = input("\nEnter language to list snippets (e.g. python): ").strip().lower()
@@ -96,5 +150,7 @@ if __name__ == "__main__":
         add_snippet_interactively()
     elif choice == "3":
         delete_snippet()
+    elif choice == "4":
+        update_snippet()
     else:
         print("❌ Invalid option selected.")
