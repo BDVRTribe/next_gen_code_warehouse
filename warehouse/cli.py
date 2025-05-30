@@ -141,6 +141,36 @@ def delete_snippet():
     else:
         print("❌ Deletion canceled.")
 
+def search_snippets_by_tag():
+    tag_input = input("Enter tag to search (e.g. math): ").strip().lower()
+    found = False
+
+    print(f"\n🔎 Searching for snippets with tag '{tag_input}'...\n")
+
+    snippets_dir = "snippets"
+    for language in os.listdir(snippets_dir):
+        lang_dir = os.path.join(snippets_dir, language)
+        if not os.path.isdir(lang_dir):
+            continue
+        for file in os.listdir(lang_dir):
+            if file.endswith(".json"):
+                path = os.path.join(lang_dir, file)
+                with open(path, "r") as f:
+                    try:
+                        snippet = json.load(f)
+                        tags = [t.lower() for t in snippet.get("tags", [])]
+                        if tag_input in tags:
+                            found = True
+                            print(f"{snippet['name']} ({language}) - {snippet['description']}")
+                            print(f"   🏷 Tags: {', '.join(snippet['tags'])}")
+                            print(f"   📅 Created: {snippet['created_at']}\n")
+                    except json.JSONDecodeError:
+                        continue
+
+    if not found:
+        print("⚠️ No snippets found with that tag.")
+
+
 def rebuild_global_index():
     print("\n📦 Rebuilding global index...")
     build_index()
@@ -153,7 +183,9 @@ if __name__ == "__main__":
     print("3. Delete a snippet")
     print("4. Update a snippet")
     print("5. Rebuild global index")
-    choice = input("Enter 1, 2, 3, 4, or 5: ").strip()
+    print("6. Search snippets by tag")
+    
+    choice = input("Enter 1–6: ").strip()
 
     if choice == "1":
         lang = input("\nEnter language to list snippets (e.g. python): ").strip().lower()
@@ -166,5 +198,7 @@ if __name__ == "__main__":
         update_snippet()
     elif choice == "5":
         rebuild_global_index()
+    elif choice == "6":
+        search_snippets_by_tag()
     else:
         print("❌ Invalid option selected.")
