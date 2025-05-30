@@ -4,6 +4,8 @@ from datetime import datetime
 from warehouse.core import store_snippet
 from warehouse.validator import validate_snippet
 from warehouse.indexer import build_index
+from warehouse.logger import log_event
+
 
 def list_snippets_by_language(language):
     directory = f"snippets/{language}"
@@ -50,7 +52,11 @@ def add_snippet_interactively():
         print(f"\n❌ Snippet not saved: {message}")
         return
 
+    
+
     store_snippet(name, code, language, tags, description)
+    
+    log_event("add", name, language, {"description": description, "tags": tags})
     print(f"\n✅ Snippet '{name}' saved successfully to 'snippets/{language}/'!")
 
 def update_snippet():
