@@ -3,6 +3,7 @@ import json
 from datetime import datetime
 from warehouse.core import store_snippet
 from warehouse.validator import validate_snippet
+from warehouse.indexer import build_index
 
 def list_snippets_by_language(language):
     directory = f"snippets/{language}"
@@ -51,7 +52,7 @@ def add_snippet_interactively():
 
     store_snippet(name, code, language, tags, description)
     print(f"\n✅ Snippet '{name}' saved successfully to 'snippets/{language}/'!")
-    
+
 def update_snippet():
     language = input("Enter language of the snippet to update: ").strip().lower()
     language_dir = os.path.join("snippets", language)
@@ -100,6 +101,11 @@ def update_snippet():
     snippet["name"] = new_name
     snippet["description"] = new_description
 
+    valid, message = validate_snippet(snippet)
+    if not valid:
+        print(f"\n❌ Snippet not updated: {message}")
+        return
+
     with open(file_path, "w") as file:
         json.dump(snippet, file, indent=4)
 
@@ -135,13 +141,19 @@ def delete_snippet():
     else:
         print("❌ Deletion canceled.")
 
+def rebuild_global_index():
+    print("\n📦 Rebuilding global index...")
+    build_index()
+    print("✅ Index rebuilt successfully.")
+
 if __name__ == "__main__":
     print("Choose an option:")
     print("1. List snippets by language")
     print("2. Add a new snippet")
     print("3. Delete a snippet")
     print("4. Update a snippet")
-    choice = input("Enter 1, 2, 3, or 4: ").strip()
+    print("5. Rebuild global index")
+    choice = input("Enter 1, 2, 3, 4, or 5: ").strip()
 
     if choice == "1":
         lang = input("\nEnter language to list snippets (e.g. python): ").strip().lower()
@@ -152,5 +164,7 @@ if __name__ == "__main__":
         delete_snippet()
     elif choice == "4":
         update_snippet()
+    elif choice == "5":
+        rebuild_global_index()
     else:
         print("❌ Invalid option selected.")
