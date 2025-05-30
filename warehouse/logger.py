@@ -18,3 +18,21 @@ def log_event(action, name, language=None, details=None):
     with open(LOG_FILE, "a") as f:
         f.write(json.dumps(entry) + "\n")
 
+def log_undo_action(action_type, language, filename, snapshot_before=None):
+    undo_log = {
+        "action_type": action_type,
+        "language": language,
+        "filename": filename,
+        "snapshot_before": snapshot_before,
+        "timestamp": datetime.utcnow().isoformat() + "Z"
+
+    }
+
+    os.makedirs("undo_logs", exist_ok=True)
+    timestamp = datetime.now().strftime("%Y-%m-%dT%H-%M-%S")
+    log_filename = f"undo_logs/{timestamp}.json"
+
+    with open(log_filename, "w") as f:
+        json.dump(undo_log, f, indent=2)
+
+
