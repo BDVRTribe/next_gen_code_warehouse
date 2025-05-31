@@ -43,16 +43,19 @@ def test_delete_snippet(tmp_path, monkeypatch):
     snippet_path.write_text(json.dumps(snippet_content), encoding="utf-8")
 
     # Monkeypatch user inputs
-    monkeypatch.setattr("builtins.input", lambda _: "1")  # select first snippet
+    inputs = iter(["1", "y"])
+    monkeypatch.setattr("builtins.input", lambda _: next(inputs))  # select first snippet
     monkeypatch.setattr("os.path.isdir", lambda path: True)
     monkeypatch.setattr("os.listdir", lambda path: [f"{snippet_name}.json"])
-    monkeypatch.setattr("builtins.input", lambda _: "y")  # confirm deletion
+    
 
     # Patch os.remove to delete the test file
     def mock_remove(path):
         if os.path.exists(path):
             os.remove(path)
     monkeypatch.setattr("os.remove", mock_remove)
+
+    os.chdir(tmp_path)
 
     # Import and run
     from warehouse.cli import delete_snippet
