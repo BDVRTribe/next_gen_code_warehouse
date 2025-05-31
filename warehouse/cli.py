@@ -5,6 +5,8 @@ from warehouse.core import store_snippet
 from warehouse.validator import validate_snippet
 from warehouse.indexer import build_index
 from warehouse.logger import log_event
+from warehouse.core import undo_last_action
+
 
 def list_snippets_by_language(language):
     directory = f"snippets/{language}"
@@ -187,6 +189,8 @@ if __name__ == "__main__":
     print("4. Update a snippet")
     print("5. Rebuild global index")
     print("6. Search snippets by tag")
+    print("7. Undo last action")
+
 
     choice = input("Enter 1–6: ").strip()
 
@@ -203,5 +207,10 @@ if __name__ == "__main__":
         rebuild_global_index()
     elif choice == "6":
         search_snippets_by_tag()
+    elif choice == "7":
+        print("\n⏪ Rolling back last action...")
+        undo_last_action()
+        print("✅ Undo complete!\n")
+
     else:
         print("❌ Invalid option selected.")
