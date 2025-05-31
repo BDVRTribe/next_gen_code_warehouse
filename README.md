@@ -32,14 +32,24 @@ A futuristic, open-source warehouse system for **storing**, **retrieving**, and 
 - 📁 JSON-backed storage engine
 - 🧩 Modular design for plug-in extensions
 - 📡 Future: API endpoints, AI code retrieval, VS Code integration
+- 📝 Add, update, delete, and list snippets interactively
+- 🔁 Full undo system for all actions (add/edit/delete)
+- 📦 Global index builder for fast tag-based search
+- 📂 CLI menu with 7 streamlined options
+
 
 ---
 
 ## 🚦 Project Status
 
-🧪 Early development.  
-📍 Now building core storage logic and CLI prototype.  
-✅ License, vision, contribution guide, and roadmap in place.
+🚀 Phase 1 complete:  
+✅ Core snippet storage  
+✅ Undo system  
+✅ Tag-based search via global index  
+✅ CLI interface (7 interactive options)  
+✅ Synced and clean GitHub repo with full documentation
+
+🔭 Phase 2: Unit tests, smarter search, and GUI
 
 ---
 
@@ -56,6 +66,22 @@ Whether you're a seasoned dev or just starting out — we’d love your help!
 > 🟢 `good first issue` tags will guide you.
 
 See [`CONTRIBUTING.md`](./CONTRIBUTING.md) to get started.
+
+---
+
+## 🧰 CLI Commands
+
+```bash
+python3 -m warehouse.cli
+
+1. List snippets by language  
+2. Add a new snippet  
+3. Delete a snippet  
+4. Update a snippet  
+5. Rebuild global index  
+6. Search snippets by tag  
+7. Undo last action  
+
 
 ---
 
