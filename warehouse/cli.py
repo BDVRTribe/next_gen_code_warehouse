@@ -198,6 +198,39 @@ def search_snippets_by_tag():
     if not found:
         print("⚠️ No snippets found with that tag.")
 
+def search_snippets_by_tag():
+    tag_input = input("Enter tag to search (e.g. math): ").strip().lower()
+    index_file = "index/index.json"
+
+    if not os.path.exists(index_file):
+        print("⚠️ Index not found. Please rebuild the index first.")
+        return
+
+    with open(index_file, "r", encoding="utf-8") as f:
+        try:
+            snippets = json.load(f)
+        except json.JSONDecodeError:
+            print("⚠️ Index file is corrupted or unreadable.")
+            return
+
+    matches = []
+    for snippet in snippets:
+        tags = [tag.lower() for tag in snippet.get("tags", [])]
+        if tag_input in tags:
+            matches.append(snippet)
+
+    if not matches:
+        print(f"❌ No snippets found with tag '{tag_input}'")
+        return
+
+    print(f"\n🔎 Found {len(matches)} snippet(s) with tag '{tag_input}':\n")
+    for snip in matches:
+        print(f"{snip['name']} ({snip['language']}) - {snip['description']}")
+        print(f"   🏷 Tags: {', '.join(snip.get('tags', []))}")
+        print(f"   👤 By: {snip.get('created_by', 'unknown')}")
+        print(f"   📁 File: {snip['path']}\n")
+
+
 def rebuild_global_index():
     print("\n📦 Rebuilding global index...")
     build_index()
