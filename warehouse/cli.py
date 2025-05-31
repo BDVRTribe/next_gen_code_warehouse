@@ -117,7 +117,7 @@ def update_snippet():
     log_event("update", new_name, language, {"tags": snippet["tags"]})
 
 def delete_snippet():
-    language = input("Enter language of the snippet to delete: ").strip()
+    language = input("Enter language of the snippet to delete: ").strip().lower()
     language_dir = os.path.join("snippets", language)
 
     if not os.path.isdir(language_dir):
@@ -139,13 +139,35 @@ def delete_snippet():
         return
 
     selected_file = files[int(choice) - 1]
+    file_path = os.path.join(language_dir, selected_file)
+
     confirm = input(f"Are you sure you want to delete '{selected_file}'? (y/N): ").strip().lower()
-    if confirm == 'y':
-        os.remove(os.path.join(language_dir, selected_file))
-        print(f"✅ Deleted {selected_file}")
-        log_event("delete", selected_file.replace(".json", ""), language)
-    else:
+    if confirm != 'y':
         print("❌ Deletion canceled.")
+        return
+
+    # ✅ Load file content before deleting
+    try:
+        with open(file_path, "r", encoding="utf-8") as f:
+            snapshot_before = json.load(f)
+    except Exception as e:
+        print(f"⚠️ Could not load snippet for undo logging: {e}")
+        snapshot_before = None
+
+    # ✅ Log undo action
+    from warehouse.logger import log_undo_action
+    log_undo_action(
+        action_type="delete",
+        language=language,
+        filename=selected_file,
+        snapshot_before=snapshot_before
+    )
+
+    # ✅ Proceed with deletion
+    os.remove(file_path)
+    print(f"✅ Deleted {selected_file}")
+    log_event("delete", selected_file.replace(".json", ""), language)
+
 
 def search_snippets_by_tag():
     tag_input = input("Enter tag to search (e.g. math): ").strip().lower()
