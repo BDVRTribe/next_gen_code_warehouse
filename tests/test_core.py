@@ -43,14 +43,14 @@ def test_delete_snippet(tmp_path, monkeypatch):
     snippet_path.write_text(json.dumps(snippet_content), encoding="utf-8")
 
     # Monkeypatch user inputs
-    inputs = iter(["1", "y"])
-    monkeypatch.setattr("builtins.input", lambda _: next(inputs))  # select first snippet
+    inputs = iter(["python", "1", "y"])  # language, snippet index, confirmation
+    monkeypatch.setattr("builtins.input", lambda _: next(inputs))
     monkeypatch.setattr("os.path.isdir", lambda path: True)
     monkeypatch.setattr("os.listdir", lambda path: [f"{snippet_name}.json"])
-    
 
-    # Patch os.remove to delete the test file
+    # Patch os.remove to actually delete the file
     def mock_remove(path):
+        path = str(path)  # Ensure compatibility
         if os.path.exists(path):
             os.remove(path)
     monkeypatch.setattr("os.remove", mock_remove)
@@ -63,4 +63,3 @@ def test_delete_snippet(tmp_path, monkeypatch):
 
     # Test: snippet should be deleted
     assert not snippet_path.exists()
-
