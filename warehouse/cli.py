@@ -214,7 +214,7 @@ if __name__ == "__main__":
     print("7. Undo last action")
 
 
-    choice = input("Enter 1–6: ").strip()
+    choice = input("Enter 1–7: ").strip()
 
     if choice == "1":
         lang = input("\nEnter language to list snippets (e.g. python): ").strip().lower()
