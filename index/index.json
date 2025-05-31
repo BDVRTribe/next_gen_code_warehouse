@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Hello World in Python",
+    "language": "python",
+    "tags": [
+      "basics",
+      "print",
+      "intro"
+    ],
+    "description": "A simple hello world example.",
+    "created_by": "BDVRTribe",
+    "path": "snippets/python/hello_world.json"
+  },
+  {
+    "name": "Factorial Function",
+    "language": "python",
+    "tags": [
+      "math",
+      "factorial",
+      "loop"
+    ],
+    "description": "Calculates factorial using a loop",
+    "created_by": "balthazardubsky",
+    "path": "snippets/python/factorial_function.json"
+  },
+  {
+    "name": "log_test_snippet",
+    "language": "python",
+    "tags": [
+      "log",
+      " test",
+      " cli"
+    ],
+    "description": "This is to test logging integration",
+    "created_by": "anonymous",
+    "path": "snippets/python/log_test_snippet.json"
+  }
+]
