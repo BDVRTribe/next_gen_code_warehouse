@@ -24,7 +24,8 @@ def log_undo_action(action_type, language, filename, snapshot_before=None):
         "language": language,
         "filename": filename,
         "snapshot_before": snapshot_before,
-        "timestamp": datetime.utcnow().isoformat() + "Z"
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+
 
     }
 
