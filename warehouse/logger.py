@@ -8,7 +8,7 @@ def log_event(action, name, language=None, details=None):
     os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
 
     entry = {
-        "timestamp": datetime.now(timezone.utc).isoformat()
+        "timestamp": datetime.now(timezone.utc).isoformat(),
         "action": action,
         "name": name,
         "language": language,
