@@ -20,8 +20,6 @@ def test_store_snippet_creates_file():
     # Test: check file exists
     assert os.path.exists(path)
 
-# ✅ Add this new test BELOW the one above
-
 def test_delete_snippet(tmp_path, monkeypatch):
     # Setup: Create a mock snippet file in a temp directory
     language = "python"
@@ -48,13 +46,17 @@ def test_delete_snippet(tmp_path, monkeypatch):
     monkeypatch.setattr("os.path.isdir", lambda path: True)
     monkeypatch.setattr("os.listdir", lambda path: [f"{snippet_name}.json"])
 
-    # Patch os.remove to actually delete the file
+    # Save the original os.remove
+    original_remove = os.remove
+
+    # Patch os.remove to delete the test file
     def mock_remove(path):
         path = str(path)  # Ensure compatibility
         if os.path.exists(path):
-            os.remove(path)
+            original_remove(path)
     monkeypatch.setattr("os.remove", mock_remove)
 
+    # Change working directory to the temp path so CLI works with test file
     os.chdir(tmp_path)
 
     # Import and run
