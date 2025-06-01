@@ -19,14 +19,15 @@ def build_index():
                     try:
                         snippet = json.load(f)
                         lang_key = snippet.get("language", language).lower()
-                        index.setdefault(lang_key, []).append({
+                        snippet_entry = {
                             "filename": file,
                             "language": lang_key,
                             "tags": snippet.get("tags", []),
                             "description": snippet.get("description", ""),
                             "created_by": snippet.get("created_by", ""),
                             "path": filepath
-                        })
+                        }
+                        index.setdefault(lang_key, []).append(snippet_entry)
                     except Exception as e:
                         print(f"⚠️ Failed to index {filepath}: {e}")
 
