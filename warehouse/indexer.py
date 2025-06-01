@@ -5,7 +5,7 @@ SNIPPET_DIR = "snippets"
 INDEX_FILE = "index/index.json"
 
 def build_index():
-    index = []
+    index = {}
 
     for language in os.listdir(SNIPPET_DIR):
         lang_path = os.path.join(SNIPPET_DIR, language)
@@ -18,9 +18,10 @@ def build_index():
                 with open(filepath, "r", encoding="utf-8") as f:
                     try:
                         snippet = json.load(f)
-                        index.append({
-                            "name": snippet.get("name"),
-                            "language": snippet.get("language"),
+                        lang_key = snippet.get("language", language).lower()
+                        index.setdefault(lang_key, []).append({
+                            "filename": file,
+                            "language": lang_key,
                             "tags": snippet.get("tags", []),
                             "description": snippet.get("description", ""),
                             "created_by": snippet.get("created_by", ""),
@@ -34,5 +35,4 @@ def build_index():
     with open(INDEX_FILE, "w", encoding="utf-8") as f:
         json.dump(index, f, indent=2)
 
-    print(f"✅ Indexed {len(index)} snippets into {INDEX_FILE}")
-
+    print(f"✅ Indexed {sum(len(v) for v in index.values())} snippets into {INDEX_FILE}")
