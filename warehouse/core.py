@@ -111,3 +111,26 @@ def undo_last_action():
     os.remove(last_log)
     print("🧹 Undo log entry removed.")
 
+def restore_snapshot(action):
+    """
+    Restore a specific snapshot from the undo log entry (used by undo_browser).
+    """
+    language = action.get("language")
+    filename = action.get("filename")
+    snapshot = action.get("snapshot_before")
+
+    if not all([language, filename, snapshot]):
+        print("❌ Incomplete undo entry. Cannot restore.")
+        return
+
+    path = os.path.join(SNIPPET_DIR, language, filename)
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+
+    try:
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(snapshot, f, indent=2)
+        print(f"✅ Restored '{filename}' in '{language}' from snapshot.")
+    except Exception as e:
+        print(f"⚠️ Failed to restore file: {e}")
+
+
