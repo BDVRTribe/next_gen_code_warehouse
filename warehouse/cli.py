@@ -4,7 +4,7 @@ from datetime import datetime
 from warehouse.core import store_snippet
 from warehouse.validator import validate_snippet
 from warehouse.indexer import build_index
-from warehouse.logger import log_event
+from warehouse.logger import log_event, log_undo_action
 from warehouse.core import undo_last_action
 
 
@@ -146,7 +146,7 @@ def delete_snippet():
         print("❌ Deletion canceled.")
         return
 
-    # ✅ Load file content before deleting
+    # ✅ Load file content before deleting (for undo)
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             snapshot_before = json.load(f)
@@ -155,7 +155,7 @@ def delete_snippet():
         snapshot_before = None
 
     # ✅ Log undo action
-    from warehouse.logger import log_undo_action
+
     log_undo_action(
         action_type="delete",
         language=language,
@@ -166,37 +166,11 @@ def delete_snippet():
     # ✅ Proceed with deletion
     os.remove(file_path)
     print(f"✅ Deleted {selected_file}")
+
+    # ✅ Log event
+    
     log_event("delete", selected_file.replace(".json", ""), language)
 
-
-def search_snippets_by_tag():
-    tag_input = input("Enter tag to search (e.g. math): ").strip().lower()
-    found = False
-
-    print(f"\n🔎 Searching for snippets with tag '{tag_input}'...\n")
-
-    snippets_dir = "snippets"
-    for language in os.listdir(snippets_dir):
-        lang_dir = os.path.join(snippets_dir, language)
-        if not os.path.isdir(lang_dir):
-            continue
-        for file in os.listdir(lang_dir):
-            if file.endswith(".json"):
-                path = os.path.join(lang_dir, file)
-                with open(path, "r") as f:
-                    try:
-                        snippet = json.load(f)
-                        tags = [t.lower() for t in snippet.get("tags", [])]
-                        if tag_input in tags:
-                            found = True
-                            print(f"{snippet['name']} ({language}) - {snippet['description']}")
-                            print(f"   🏷 Tags: {', '.join(snippet['tags'])}")
-                            print(f"   📅 Created: {snippet['created_at']}\n")
-                    except json.JSONDecodeError:
-                        continue
-
-    if not found:
-        print("⚠️ No snippets found with that tag.")
 
 def search_snippets_by_tag():
     tag_input = input("Enter tag to search (e.g. math): ").strip().lower()
