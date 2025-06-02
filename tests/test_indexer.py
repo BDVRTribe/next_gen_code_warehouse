@@ -37,6 +37,6 @@ def test_build_index_creates_index_file(tmp_path, monkeypatch):
 
     assert "python" in data
     assert len(data["python"]) == 1
-    assert data["python"][0]["name"] == "sample_snippet"
+    assert data["python"][0]["filename"] == "sample_snippet"
     assert data["python"][0]["language"] == "python"
 
