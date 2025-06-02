@@ -85,6 +85,21 @@ python3 -m warehouse.cli
 
 ---
 
+## 🕹️ Additional CLI Tools
+
+### 🔎 `index_browser.py` – Interactive Snippet Explorer
+
+```bash
+python3 warehouse/index_browser.py
+
+- **`[s] Search`** – Search snippets by filename, description, or tags  
+- **`[v] View All`** – Display all snippets grouped by language  
+- **`Enter number`** – Preview full snippet details and source code  
+- **`[q] Quit`** – Exit the browser
+
+
+---
+
 ## 📜 License
 
 Licensed under **GNU AGPL-3.0** to encourage collaboration and prevent closed forks.  
