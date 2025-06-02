@@ -69,9 +69,9 @@ def run_browser():
 
                choice = input("\n📥 Enter number to preview, or press Enter to skip: ").strip()
                if choice.isdigit():
-                   index = int(choice) - 1
-                   if 0 <= index < len(results):
-                       _, selected_snippet = results[index]
+                   selection = int(choice) - 1
+                   if 0 <= selection < len(results):
+                       _, selected_snippet = results[selection]
                        preview_snippet(selected_snippet)
                    else:
                        print("❌ Invalid selection.")
