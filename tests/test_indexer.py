@@ -35,7 +35,8 @@ def test_build_index_creates_index_file(tmp_path, monkeypatch):
     with open(index_file, "r", encoding="utf-8") as f:
         data = json.load(f)
 
-    assert len(data) == 1
-    assert data[0]["name"] == "sample_snippet"
-    assert data[0]["language"] == "python"
+    assert "python" in data
+    assert len(data["python"]) == 1
+    assert data["python"][0]["name"] == "sample_snippet"
+    assert data["python"][0]["language"] == "python"
 
