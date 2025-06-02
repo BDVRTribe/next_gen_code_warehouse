@@ -28,6 +28,27 @@ def search_index(index, keyword):
                 any(keyword_lower in tag.lower() for tag in snippet.get("tags", []))):
                 results.append((language, snippet))
     return results
+    
+def preview_snippet(snippet):
+    print("\n📄 Snippet Preview:")
+    print(f"Filename    : {snippet.get('filename', 'N/A')}")
+    print(f"Language    : {snippet.get('language', 'N/A')}")
+    print(f"Description : {snippet.get('description', 'N/A')}")
+    print(f"Tags        : {', '.join(snippet.get('tags', []))}")
+    print(f"Created by  : {snippet.get('created_by', 'N/A')}")
+
+    path = snippet.get("path")
+    if path and os.path.exists(path):
+        print("\n📂 Contents:\n" + "-"*40)
+        with open(path, "r", encoding="utf-8") as f:
+            try:
+                data = json.load(f)
+                print(data.get("code", "(no code found)"))
+            except Exception as e:
+                print(f"⚠️ Could not read code content: {e}")
+    else:
+        print("⚠️ Snippet file not found or path missing.")
+        
 
 def run_browser():
     index = load_index()
@@ -42,9 +63,19 @@ def run_browser():
             keyword = input("🔍 Enter search keyword: ").strip()
             results = search_index(index, keyword)
             if results:
-                print(f"\n🔎 Found {len(results)} result(s):")
-                for lang, snippet in results:
-                    print(f"- [{lang}] {snippet['filename']} :: {snippet.get('description', '')}")
+               print(f"\n🔎 Found {len(results)} result(s):")
+               for i, (lang, snippet) in enumerate(results, start=1):
+                   print(f"{i}. [{lang}] {snippet['filename']} :: {snippet.get('description', '')}")
+
+               choice = input("\n📥 Enter number to preview, or press Enter to skip: ").strip()
+               if choice.isdigit():
+                   index = int(choice) - 1
+                   if 0 <= index < len(results):
+                       _, selected_snippet = results[index]
+                       preview_snippet(selected_snippet)
+                   else:
+                       print("❌ Invalid selection.")
+
             else:
                 print("❌ No matches found.")
         elif cmd == "v":
