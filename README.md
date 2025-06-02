@@ -97,6 +97,18 @@ python3 warehouse/index_browser.py
 - **`Enter number`** – Preview full snippet details and source code  
 - **`[q] Quit`** – Exit the browser
 
+---
+
+## ✅ Tests
+
+We use **pytest** to validate the functionality of key components in the project.
+
+### 🧪 Running Tests
+
+To run all tests, simply execute:
+
+
+pytest
 
 ---
 
