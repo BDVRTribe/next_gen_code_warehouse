@@ -12,11 +12,14 @@ def build_index():
         if not os.path.isdir(lang_path):
             continue
 
+        # ✅ Always initialize each language with an empty dict
+        index[language] = {}
+
         for file in os.listdir(lang_path):
             if file.endswith(".json"):
                 filepath = os.path.join(lang_path, file)
-                with open(filepath, "r", encoding="utf-8") as f:
-                    try:
+                try:
+                    with open(filepath, "r", encoding="utf-8") as f:
                         snippet = json.load(f)
                         lang_key = snippet.get("language", language).lower()
                         snippet_entry = {
@@ -25,15 +28,24 @@ def build_index():
                             "tags": snippet.get("tags", []),
                             "description": snippet.get("description", ""),
                             "created_by": snippet.get("created_by", ""),
-                            "path": filepath
+                            "path": filepath,
+                            "code": snippet.get("code", "")
                         }
-                        index.setdefault(lang_key, []).append(snippet_entry)
-                    except Exception as e:
-                        print(f"⚠️ Failed to index {filepath}: {e}")
+                        index[language][file] = snippet_entry
+                except Exception as e:
+                    print(f"⚠️ Failed to index {filepath}: {e}")
 
+    # ✅ Ensure index directory exists
     os.makedirs(os.path.dirname(INDEX_FILE), exist_ok=True)
 
+    # ✅ Convert nested dict to list for file output
+    export_data = {
+        lang: list(snippets.values()) for lang, snippets in index.items()
+    }
+
     with open(INDEX_FILE, "w", encoding="utf-8") as f:
-        json.dump(index, f, indent=2)
+        json.dump(export_data, f, indent=2)
 
     print(f"✅ Indexed {sum(len(v) for v in index.values())} snippets into {INDEX_FILE}")
+    return index
+
