@@ -1,12 +1,12 @@
 import os
 import json
+import subprocess
 from datetime import datetime
 from warehouse.core import store_snippet
 from warehouse.validator import validate_snippet
 from warehouse.indexer import build_index
 from warehouse.logger import log_event, log_undo_action
 from warehouse.core import undo_last_action
-
 
 def list_snippets_by_language(language):
     directory = f"snippets/{language}"
@@ -146,15 +146,12 @@ def delete_snippet():
         print("❌ Deletion canceled.")
         return
 
-    # ✅ Load file content before deleting (for undo)
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             snapshot_before = json.load(f)
     except Exception as e:
         print(f"⚠️ Could not load snippet for undo logging: {e}")
         snapshot_before = None
-
-    # ✅ Log undo action
 
     log_undo_action(
         action_type="delete",
@@ -163,14 +160,9 @@ def delete_snippet():
         snapshot_before=snapshot_before
     )
 
-    # ✅ Proceed with deletion
     os.remove(file_path)
     print(f"✅ Deleted {selected_file}")
-
-    # ✅ Log event
-    
     log_event("delete", selected_file.replace(".json", ""), language)
-
 
 def search_snippets_by_tag():
     tag_input = input("Enter tag to search (e.g. math): ").strip().lower()
@@ -188,10 +180,11 @@ def search_snippets_by_tag():
             return
 
     matches = []
-    for snippet in snippets:
-        tags = [tag.lower() for tag in snippet.get("tags", [])]
-        if tag_input in tags:
-            matches.append(snippet)
+    for lang_snippets in snippets.values():
+        for snippet in lang_snippets:
+            tags = [tag.lower() for tag in snippet.get("tags", [])]
+            if tag_input in tags:
+                matches.append(snippet)
 
     if not matches:
         print(f"❌ No snippets found with tag '{tag_input}'")
@@ -204,11 +197,13 @@ def search_snippets_by_tag():
         print(f"   👤 By: {snip.get('created_by', 'unknown')}")
         print(f"   📁 File: {snip['path']}\n")
 
-
 def rebuild_global_index():
     print("\n📦 Rebuilding global index...")
     build_index()
     print("✅ Index rebuilt successfully.")
+
+def launch_undo_gui():
+    subprocess.run(["python3", "undo_browser.py"])
 
 if __name__ == "__main__":
     print("Choose an option:")
@@ -219,9 +214,9 @@ if __name__ == "__main__":
     print("5. Rebuild global index")
     print("6. Search snippets by tag")
     print("7. Undo last action")
+    print("8. Launch Undo Snapshot Browser")
 
-
-    choice = input("Enter 1–7: ").strip()
+    choice = input("Enter 1–8: ").strip()
 
     if choice == "1":
         lang = input("\nEnter language to list snippets (e.g. python): ").strip().lower()
@@ -240,6 +235,9 @@ if __name__ == "__main__":
         print("\n⏪ Rolling back last action...")
         undo_last_action()
         print("✅ Undo complete!\n")
-
+    elif choice == "8":
+        print("\n🚀 Launching Undo Snapshot Browser...")
+        launch_undo_gui()
     else:
         print("❌ Invalid option selected.")
+
