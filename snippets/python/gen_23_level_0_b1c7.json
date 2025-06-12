@@ -1,0 +1,11 @@
+{
+  "title": "gen_23_level_0_b1c7",
+  "code": "Certainly! Let me create a fresh, elegant, and efficient palindrome checker function that goes beyond the usual approach by ignoring case and non-alphanumeric characters, making it robust for real-world text inputs.\n\n```python\ndef is_palindrome(word: str) -> bool:\n    # Filter only alphanumeric characters and convert to lowercase\n    filtered = ''.join(ch.lower() for ch in word if ch.isalnum())\n    # Check if the filtered string reads the same forwards and backwards\n    return filtered == filtered[::-1]\n```\n\n### Explanation:\n- We sanitize the input by removing spaces, punctuation, and other non-alphanumeric characters.\n- We normalize the case to lowercase.\n- Then we perform a straightforward palindrome check by comparing the string to its reverse.\n\n### Example Usage:\n\n```python\nprint(is_palindrome(\"Racecar\"))        # True\nprint(is_palindrome(\"A man, a plan, a canal, Panama\"))  # True\nprint(is_palindrome(\"Hello, World!\"))  # False\n```\n\nThis approach is versatile and handles diverse inputs gracefully.",
+  "description": "Write a function to check if a word is a palindrome.",
+  "tags": [
+    "AI",
+    "chamber",
+    "level-0"
+  ],
+  "created_at": "2025-06-11T09:45:55.817837"
+}

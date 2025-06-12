@@ -1,0 +1,9 @@
+{
+  "timestamp": "2025-06-07T06:09:37.010631+00:00",
+  "action_type": "EDIT",
+  "language": "python",
+  "filename": "test_snippet.json",
+  "code": "{\n  \"name\": \"test_snippet\",\n  \"language\": \"python\",\n  \"tags\": [\n    \"test\",\n    \"demo\"\n  ],\n  \"description\": \"A test snippet.\",\n  \"code\": \"print('Hello, test!')\",\n  \"created_by\": \"test_runner\",\n  \"created_at\": \"2025-05-31T09:41:15.861576+00:00\"\n}",
+  "path": "snippets/python/test_snippet.json",
+  "snapshot_before": null
+}

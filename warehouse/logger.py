@@ -4,6 +4,8 @@ from datetime import datetime, timezone
 
 LOG_FILE = "logs/activity.log"
 UNDO_LOG_DIR = "undo_logs"
+MEMORY_LOG_FILE = "memory_logs/memory.jsonl"
+
 
 def log_event(action, name, language=None, details=None):
     """
@@ -21,6 +23,7 @@ def log_event(action, name, language=None, details=None):
 
     with open(LOG_FILE, "a", encoding="utf-8") as f:
         f.write(json.dumps(entry) + "\n")
+
 
 def log_undo_action(action_type, language, filename, snapshot_before=None):
     """
@@ -58,4 +61,14 @@ def log_undo_action(action_type, language, filename, snapshot_before=None):
 
     with open(undo_log_path, "w", encoding="utf-8") as f:
         json.dump([log_entry], f, indent=2)
+
+
+def log_memory_entry(data, memory_file=MEMORY_LOG_FILE):
+    """
+    Append a generation record to memory.jsonl for later training or evaluation.
+    """
+    os.makedirs(os.path.dirname(memory_file), exist_ok=True)
+
+    with open(memory_file, "a", encoding="utf-8") as f:
+        f.write(json.dumps(data) + "\n")
 

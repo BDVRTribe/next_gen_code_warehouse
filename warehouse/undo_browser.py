@@ -1,6 +1,7 @@
 import os
 import json
 import glob
+from difflib import unified_diff
 from warehouse.core import restore_snapshot
 
 UNDO_DIR = "undo_logs"
@@ -30,12 +31,27 @@ def filter_entries(entries, action_filter=None, keyword=None):
         filtered.append((path, entry))
     return filtered
 
+def compare_snapshot_with_current(snapshot_entry):
+    """Returns a diff if current file exists and differs from snapshot."""
+    file_path = snapshot_entry.get("path")
+    if not file_path or not os.path.exists(file_path):
+        return "❌ File not found for comparison."
+
+    try:
+        with open(file_path, "r", encoding="utf-8") as f:
+            current_code = f.read().splitlines()
+        snapshot_code = snapshot_entry.get("code", "").splitlines()
+        diff = list(unified_diff(snapshot_code, current_code, fromfile="snapshot", tofile="current"))
+        return "\n".join(diff) if diff else "✅ No differences."
+    except Exception as e:
+        return f"⚠️ Error comparing files: {e}"
+
 def display_page(entries, page):
     os.system('clear' if os.name == 'posix' else 'cls')
     total = len(entries)
     start = (page - 1) * ITEMS_PER_PAGE
     end = min(start + ITEMS_PER_PAGE, total)
-    
+
     print(f"\n🕑 Undo Log Entries ({start + 1}–{end} of {total}):\n")
     for i, (log_path, data) in enumerate(entries[start:end], start=start + 1):
         name = data.get("filename", "unknown")
@@ -62,7 +78,6 @@ def run_browser():
         return
 
     all_entries = load_undo_logs()
-    print(f"🔍 DEBUG: Loaded {len(all_entries)} undo log entries.")  # Debug line
     filtered_entries = all_entries
     current_page = 1
 
@@ -72,7 +87,7 @@ def run_browser():
             return
 
         display_page(filtered_entries, current_page)
-        print("\n[n] Next page | [p] Prev page | [f] Filter | [r] Reset filters | [q] Quit")
+        print("\n[n] Next page | [p] Prev page | [f] Filter | [r] Reset filters | [d] Diff | [q] Quit")
         cmd = input("Command or number: ").strip().lower()
 
         if cmd == "n":
@@ -90,7 +105,6 @@ def run_browser():
             kw = input("Filter by filename keyword or leave blank: ").strip()
             filtered_entries = filter_entries(all_entries, act, kw)
             current_page = 1
-            print(f"🔍 DEBUG: Filtered down to {len(filtered_entries)} entries.")
         elif cmd == "r":
             filtered_entries = all_entries
             current_page = 1
@@ -98,6 +112,13 @@ def run_browser():
         elif cmd == "q":
             print("👋 Exiting undo browser.")
             break
+        elif cmd == "d":
+            idx = prompt_selection(filtered_entries)
+            if idx is not None:
+                _, snapshot = filtered_entries[idx]
+                print("\n🔍 Diff Preview:")
+                print(compare_snapshot_with_current(snapshot))
+                input("\nPress Enter to continue...")
         elif cmd.isdigit():
             idx = int(cmd) - 1
             if 0 <= idx < len(filtered_entries):

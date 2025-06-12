@@ -1,0 +1,11 @@
+{
+  "title": "gen_33_level_0_e0ad",
+  "code": "Here's a function that checks if a word is a palindrome, but with a twist: it uses a recursive approach combined with Python's functional programming features to elegantly handle the check.\n\n```python\ndef is_palindrome(word):\n    word = word.lower()  # normalize case\n    \n    # Recursive helper function\n    def check(chars):\n        if len(chars) <= 1:\n            return True\n        return chars[0] == chars[-1] and check(chars[1:-1])\n    \n    return check(word)\n```\n\n**Explanation:**\n- The word is converted to lowercase to ensure case-insensitive comparison.\n- A recursive helper function `check` compares the first and last characters.\n- If they match, it recurses on the substring excluding those characters.\n- If at any point characters differ, it returns `False`.\n- If the substring is length 0 or 1, it returns `True`.\n\nExample usage:\n\n```python\nprint(is_palindrome(\"Racecar\"))  # True\nprint(is_palindrome(\"Python\"))   # False\n```\n\nThis approach goes beyond the typical slicing reversal check and demonstrates recursion elegantly.",
+  "description": "Write a function to check if a word is a palindrome.",
+  "tags": [
+    "AI",
+    "chamber",
+    "level-0"
+  ],
+  "created_at": "2025-06-11T09:46:53.850886"
+}

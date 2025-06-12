@@ -1,0 +1,11 @@
+{
+  "title": "gen_31_level_0_e7a4",
+  "code": "Here's a fresh take on checking if a word is a palindrome, going beyond the usual straightforward reverse comparison. This solution explores a functional and recursive approach that elegantly handles the check without slicing or loops explicitly:\n\n```python\ndef is_palindrome(word):\n    \"\"\"\n    Check if a given word is a palindrome using recursion.\n\n    Args:\n        word (str): The word to check.\n\n    Returns:\n        bool: True if word is palindrome, False otherwise.\n    \"\"\"\n    # Normalize the word to lowercase for case-insensitive comparison\n    word = word.lower()\n\n    # Base case: if word length is 0 or 1, it's a palindrome\n    if len(word) <= 1:\n        return True\n\n    # Check first and last characters, recurse on the middle substring\n    return word[0] == word[-1] and is_palindrome(word[1:-1])\n```\n\n### Explanation:\n- The function normalizes the word (lowercase) for case-insensitive palindrome detection.\n- It recursively compares the first and last characters.\n- If they match, it recurses on the substring excluding those characters.\n- The base case returns True when the substring length is 0 or 1.\n\n### Example usage:\n\n```python\nprint(is_palindrome(\"Radar\"))   # True\nprint(is_palindrome(\"Python\"))  # False\nprint(is_palindrome(\"Level\"))   # True\n```\n\n---\n\nThis recursive approach is neat and elegant, avoiding explicit loops or slicing reversal, and can be extended or modified creatively for more complex palindrome-like pattern checks.",
+  "description": "Write a function to check if a word is a palindrome.",
+  "tags": [
+    "AI",
+    "chamber",
+    "level-0"
+  ],
+  "created_at": "2025-06-11T09:46:46.405820"
+}

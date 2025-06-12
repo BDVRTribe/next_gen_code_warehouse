@@ -1,0 +1,57 @@
+{
+  "5": [
+    "Write a Python function to return the factorial of a number.",
+    "Create a function that checks whether a number is even or odd.",
+    "Write a function to reverse a string.",
+    "Create a function that sums the numbers in a list.",
+    "Generate a list of Fibonacci numbers up to a given number.",
+    "Write a function to check if a word is a palindrome.",
+    "Create a function that returns the largest of three numbers.",
+    "Write a program that prints the multiplication table of a number.",
+    "Build a function that counts vowels in a string.",
+    "Write a function that finds the minimum value in a list."
+  ],
+  "4": [
+    "Read a text file and count the number of words in it.",
+    "Parse a CSV file and calculate the average of a specific column.",
+    "Create a basic calculator that handles +, -, *, and / with error handling.",
+    "Write a program that accepts user input and saves it to a file.",
+    "Create a function that sorts a list of dictionaries by a key.",
+    "Build a program that merges two dictionaries into one.",
+    "Write a program that removes duplicate items from a list.",
+    "Create a script that renames all files in a folder sequentially.",
+    "Write a program that checks if a given year is a leap year.",
+    "Build a program that counts how many times each word appears in a sentence."
+  ],
+  "3": [
+    "Create a class to represent a bank account with deposit and withdrawal methods.",
+    "Implement a binary search algorithm for a sorted list.",
+    "Build a class-based contact manager that stores and retrieves contacts from a file.",
+    "Write a function that calculates the Levenshtein distance between two strings.",
+    "Implement a simple CLI todo list app using classes and file storage.",
+    "Build a function that detects anagrams between two strings.",
+    "Create a class that models a deck of cards and supports shuffling and drawing.",
+    "Write a program that simulates a dice roll and tracks roll frequency.",
+    "Build a program that encrypts and decrypts a message using Caesar cipher.",
+    "Write a recursive function to calculate power (x^n)."
+  ],
+  "2": [
+    "Create a Python function that generates prime numbers up to n.",
+    "Build a function that finds all divisors of a number.",
+    "Create a function that returns True if a string contains all vowels.",
+    "Write a script that calculates compound interest."
+  ],
+  "1": [
+    "Implement a simple password generator using random module.",
+    "Write a function that converts temperature between Celsius and Fahrenheit.",
+    "Create a program that simulates a coin toss 1000 times.",
+    "Write a program that calculates Body Mass Index (BMI)."
+  ],
+  "0": [
+    "Create a basic chatbot using if/else logic.",
+    "Simulate a basic ATM system with withdraw and deposit functions.",
+    "Build a calculator that evaluates mathematical expressions using eval().",
+    "Write a program that visualizes data using matplotlib."
+  ]
+}
+

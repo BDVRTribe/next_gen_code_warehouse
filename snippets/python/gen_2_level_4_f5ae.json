@@ -1,0 +1,11 @@
+{
+  "title": "gen_2_level_4_f5ae",
+  "code": "```python\ndef is_palindrome(word):\n    word = word.lower()  # Make it case-insensitive\n    reversed_word = \"\"\n    for char in word:\n        reversed_word = char + reversed_word\n    if word == reversed_word:\n        return True\n    else:\n        return False\n\n# Example usage:\nprint(is_palindrome(\"Radar\"))  # True\nprint(is_palindrome(\"Hello\"))  # False\n```",
+  "description": "Write a function to check if a word is a palindrome.",
+  "tags": [
+    "AI",
+    "chamber",
+    "level-4"
+  ],
+  "created_at": "2025-06-11T09:38:51.552614"
+}

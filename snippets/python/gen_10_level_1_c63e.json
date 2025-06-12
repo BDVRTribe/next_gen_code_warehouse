@@ -1,0 +1,11 @@
+{
+  "title": "gen_10_level_1_c63e",
+  "code": "Here's an advanced Python solution to check if a word is a palindrome, featuring a decorator for input validation and caching results to optimize repeated checks. This approach demonstrates decorators, functools caching, and clean code practices:\n\n```python\nfrom functools import lru_cache\nimport re\n\ndef validate_word(func):\n    \"\"\"Decorator to validate the input is a single alphabetic word.\"\"\"\n    def wrapper(word):\n        if not isinstance(word, str):\n            raise TypeError(\"Input must be a string\")\n        if not re.fullmatch(r\"[A-Za-z]+\", word):\n            raise ValueError(\"Input must be a single word containing only alphabetic characters\")\n        return func(word)\n    return wrapper\n\n@lru_cache(maxsize=None)\n@validate_word\ndef is_palindrome(word: str) -> bool:\n    \"\"\"\n    Check if a word is a palindrome.\n\n    Args:\n        word (str): The word to check.\n\n    Returns:\n        bool: True if the word is a palindrome, False otherwise.\n    \"\"\"\n    normalized = word.lower()\n    return normalized == normalized[::-1]\n\n# Example usage:\nif __name__ == \"__main__\":\n    test_words = [\"Racecar\", \"Python\", \"Level\", \"world\", \"Deified\"]\n    for w in test_words:\n        print(f\"{w}: {is_palindrome(w)}\")\n```\n\n### Explanation:\n- **Decorator `validate_word`** ensures the input is a non-empty alphabetic string.\n- **`@lru_cache`** caches results for fast repeated palindrome checks.\n- Normalizes the input by lowering case before checking.\n- Clean, readable, and efficient.",
+  "description": "Write a function to check if a word is a palindrome.",
+  "tags": [
+    "AI",
+    "chamber",
+    "level-1"
+  ],
+  "created_at": "2025-06-11T09:44:40.424830"
+}

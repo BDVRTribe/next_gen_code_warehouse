@@ -5,59 +5,33 @@ from warehouse.logger import log_undo_action, log_event  # Import your logging t
 
 SNIPPET_DIR = "snippets"
 
-def store_snippet(name, code, language, tags=None, description="", created_by="anonymous"):
-    """
-    Store a code snippet in a structured JSON file inside a language-specific directory.
-    
-    Parameters:
-        name (str): The name of the snippet.
-        code (str): The actual code as a string.
-        language (str): Programming language the snippet belongs to.
-        tags (list, optional): List of tags related to the snippet.
-        description (str, optional): Short description of what the snippet does.
-        created_by (str, optional): Origin of the snippet creation (default is "anonymous").
-    """
+def store_snippet(language, code, description, tags=None, title=None):
+    import os, json, uuid
+    from datetime import datetime
+
+    if tags is None:
+        tags = []
+
+    if title is None:
+        title = f"snippet_{uuid.uuid4().hex[:8]}"
+
     snippet = {
-        "name": name,
-        "language": language,
-        "tags": tags or [],
-        "description": description,
+        "title": title,
         "code": code,
-        "created_by": created_by,
-        "created_at": datetime.now(timezone.utc).isoformat()
+        "description": description,
+        "tags": tags,
+        "created_at": datetime.utcnow().isoformat()
     }
 
-    directory = os.path.join(SNIPPET_DIR, language.lower())
-    os.makedirs(directory, exist_ok=True)
+    # Ensure the directory exists
+    os.makedirs(f"snippets/{language}", exist_ok=True)
 
-    filename_safe = name.lower().replace(" ", "_")
-    filepath = os.path.join(directory, f"{filename_safe}.json")
-
-    # Determine if it's a new snippet or an overwrite
-    if os.path.exists(filepath):
-        with open(filepath, "r", encoding="utf-8") as f:
-            snapshot_before = json.load(f)
-        action_type = "edit"
-    else:
-        snapshot_before = None
-        action_type = "add"
-
-    # Log undo action
-    log_undo_action(
-        action_type=action_type,
-        language=language.lower(),
-        filename=f"{filename_safe}.json",
-        snapshot_before=snapshot_before
-    )
-
-    # Save the new/updated snippet
-    with open(filepath, "w", encoding="utf-8") as f:
+    # Save the file as: snippets/python/title.json
+    path = f"snippets/{language}/{title}.json"
+    with open(path, "w") as f:
         json.dump(snippet, f, indent=2)
 
-    print(f"✅ Snippet '{name}' saved to {filepath}")
-    
-    # Log event
-    log_event(action=action_type, name=name, language=language.lower())
+    print(f"💾 Snippet stored at {path}")
 
 
 def undo_last_action():

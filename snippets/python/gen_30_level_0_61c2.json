@@ -1,0 +1,11 @@
+{
+  "title": "gen_30_level_0_61c2",
+  "code": "Here's a Python function to check if a word is a palindrome, incorporating a simple Domain-Specific Language (DSL) style approach for defining the check, and using a generator expression for efficient evaluation:\n\n```python\ndef palindrome_checker(word):\n    \"\"\"\n    DSL-inspired palindrome checker.\n    Usage: palindrome_checker(\"radar\") -> True\n    \"\"\"\n\n    # Define a mini-DSL for palindrome checking\n    def is_palindrome(seq):\n        # Check if sequence equals its reverse using a generator expression for lazy evaluation\n        return all(seq[i] == seq[-i-1] for i in range(len(seq) // 2))\n\n    # Normalize input: lowercase and remove non-alphanumeric characters\n    normalized = ''.join(ch.lower() for ch in word if ch.isalnum())\n\n    return is_palindrome(normalized)\n\n\n# Example usage:\nprint(palindrome_checker(\"A man, a plan, a canal, Panama\"))  # True\nprint(palindrome_checker(\"hello\"))  # False\n```\n\n### Explanation:\n- The function normalizes the input to ignore casing and non-alphanumeric characters.\n- Uses a nested function `is_palindrome` to represent the palindrome check DSL.\n- Uses a generator expression inside `all()` for efficient, lazy comparison without creating intermediate strings.\n- This approach is clean, extensible, and efficient for large inputs.",
+  "description": "Write a function to check if a word is a palindrome.",
+  "tags": [
+    "AI",
+    "chamber",
+    "level-0"
+  ],
+  "created_at": "2025-06-11T09:46:40.977230"
+}

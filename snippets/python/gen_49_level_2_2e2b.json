@@ -1,0 +1,11 @@
+{
+  "title": "gen_49_level_2_2e2b",
+  "code": "Here's a Python function that checks if a word is a palindrome. To incorporate a cutting-edge technique, I'll demonstrate a simple Domain Specific Language (DSL) approach for palindrome checking and use Python's `functools.lru_cache` decorator to optimize repeated checks (a lightweight form of memoization which can be useful in distributed or repeated inference scenarios).\n\n```python\nfrom functools import lru_cache\n\n# Define a mini-DSL for string operations related to palindrome checking\nclass PalindromeDSL:\n    def __init__(self, word: str):\n        self.word = word.lower()\n\n    def normalized(self):\n        # Normalize the word by removing non-alphanumeric characters\n        return ''.join(ch for ch in self.word if ch.isalnum())\n\n    @lru_cache(maxsize=None)\n    def is_palindrome(self):\n        norm_word = self.normalized()\n        return norm_word == norm_word[::-1]\n\n\ndef check_palindrome(word: str) -> bool:\n    \"\"\"\n    Check if the given word is a palindrome using the PalindromeDSL.\n    \"\"\"\n    palindrome_checker = PalindromeDSL(word)\n    return palindrome_checker.is_palindrome()\n\n\n# Example usage:\nif __name__ == \"__main__\":\n    test_words = [\"Racecar\", \"Python\", \"A man, a plan, a canal: Panama\"]\n    for w in test_words:\n        print(f\"'{w}' is a palindrome? {check_palindrome(w)}\")\n```\n\n### Explanation:\n- **DSL**: The `PalindromeDSL` class encapsulates the logic related to palindrome operations, e.g., normalization and palindrome checking.\n- **Normalization**: Removes case sensitivity and non-alphanumeric characters to handle phrases.\n- **Memoization**: `@lru_cache` optimizes repeated palindrome checks for the same input.\n- The function `check_palindrome` is the user-facing API performing the palindrome check.\n\nThis approach cleanly separates concerns and is easily extensible for more complex string operations or distributed checks.",
+  "description": "Write a function to check if a word is a palindrome.",
+  "tags": [
+    "AI",
+    "chamber",
+    "level-2"
+  ],
+  "created_at": "2025-06-11T09:48:29.810241"
+}

@@ -1,0 +1,10 @@
+{
+  "title": "gen_4_level_3_0775",
+  "code": "def is_palindrome(word):\n    try:\n        word = word.lower()\n        return word == word[::-1]\n    except Exception as e:\n        print(f\"An error occurred: {e}\")\n        return False\n\n# Test the function\nprint(is_palindrome('racecar'))  # Returns True\nprint(is_palindrome('python'))  # Returns False\nprint(is_palindrome('level'))  # Returns True\nprint(is_palindrome('Rotator'))  # Returns True\nprint(is_palindrome(12321))  # Returns False (Not a word)",
+  "description": "Write a function to check if a word is a palindrome.",
+  "tags": [
+    "generated",
+    "fibonacci"
+  ],
+  "created_at": "2025-06-11T09:27:25.081594"
+}

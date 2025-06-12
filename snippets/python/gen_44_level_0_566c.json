@@ -1,0 +1,11 @@
+{
+  "title": "gen_44_level_0_566c",
+  "code": "```python\ndef is_palindrome(word: str) -> bool:\n    \"\"\"\n    Check if a word is a palindrome.\n\n    This function considers the word as-is, case-sensitive and including all characters.\n    \"\"\"\n    return word == word[::-1]\n```",
+  "description": "Write a function to check if a word is a palindrome.",
+  "tags": [
+    "AI",
+    "chamber",
+    "level-0"
+  ],
+  "created_at": "2025-06-11T09:47:56.597669"
+}

@@ -1,0 +1,11 @@
+{
+  "title": "gen_20_level_0_c6c4",
+  "code": "Here\u2019s a novel and elegant approach to check if a word is a palindrome by using Python\u2019s `collections.deque` to exploit its efficient pop operations from both ends, demonstrating a different paradigm from the usual slicing or reversed string checks:\n\n```python\nfrom collections import deque\n\ndef is_palindrome(word: str) -> bool:\n    chars = deque(word)\n    while len(chars) > 1:\n        if chars.popleft() != chars.pop():\n            return False\n    return True\n```\n\n### Explanation\n- We convert the string into a deque, which allows O(1) pops from both ends.\n- We then compare characters from front and back simultaneously.\n- If any mismatch is found, it immediately returns `False`.\n- If the loop completes, the word is a palindrome.\n\nThis approach is memory efficient and demonstrates a less conventional method than the typical slicing or reversing approach.",
+  "description": "Write a function to check if a word is a palindrome.",
+  "tags": [
+    "AI",
+    "chamber",
+    "level-0"
+  ],
+  "created_at": "2025-06-11T09:45:45.012926"
+}

@@ -1,0 +1,11 @@
+{
+  "title": "gen_14_level_0_8939",
+  "code": "Here is a revolutionary approach to checking if a word is a palindrome in Python \u2014 leveraging Python's powerful slicing and a functional twist by using a lambda and an inline expression while keeping it concise and elegant:\n\n```python\nis_palindrome = lambda w: (w := w.lower()) == w[::-1]\n```\n\n### Explanation:\n- Uses the walrus operator (`:=`) to assign the lowercase version of the input word to `w` inside the lambda itself.\n- Compares the lowercase string to its reverse (`w[::-1]`).\n- Returns `True` if palindrome, `False` otherwise.\n\n### Example usage:\n```python\nprint(is_palindrome(\"Racecar\"))  # True\nprint(is_palindrome(\"Python\"))   # False\n```\n\nThis one-liner is clean, efficient, and uses modern Python features to push the paradigm slightly.",
+  "description": "Write a function to check if a word is a palindrome.",
+  "tags": [
+    "AI",
+    "chamber",
+    "level-0"
+  ],
+  "created_at": "2025-06-11T09:45:00.792024"
+}

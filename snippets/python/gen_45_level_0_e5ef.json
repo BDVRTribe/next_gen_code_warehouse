@@ -1,0 +1,11 @@
+{
+  "title": "gen_45_level_0_e5ef",
+  "code": "```python\ndef is_palindrome(word: str) -> bool:\n    \"\"\"\n    Check if the given word is a palindrome.\n\n    A palindrome reads the same backward as forward.\n\n    Args:\n        word (str): The word to check.\n\n    Returns:\n        bool: True if word is palindrome, False otherwise.\n    \"\"\"\n    # Normalize the word: lowercase and remove non-alphanumeric characters\n    normalized = ''.join(ch.lower() for ch in word if ch.isalnum())\n    return normalized == normalized[::-1]\n```",
+  "description": "Write a function to check if a word is a palindrome.",
+  "tags": [
+    "AI",
+    "chamber",
+    "level-0"
+  ],
+  "created_at": "2025-06-11T09:47:58.970570"
+}

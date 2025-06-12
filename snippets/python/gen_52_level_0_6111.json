@@ -1,0 +1,11 @@
+{
+  "title": "gen_52_level_0_6111",
+  "code": "Here's a revolutionary approach to checking if a word is a palindrome that goes beyond conventional methods. Instead of just reversing the string or comparing characters, we will use a **hashing technique** that leverages the properties of polynomial rolling hash to verify palindrome property in O(n) time but with a unique perspective.\n\n---\n\n### Explanation:\n- Compute a forward hash from left to right.\n- Compute a backward hash from right to left.\n- If both hashes match at the end, the word is a palindrome.\n- This method can be extended to work efficiently with very large strings and can be adapted for substring palindrome checks.\n\n---\n\n### Code:\n\n```python\ndef is_palindrome(word: str) -> bool:\n    \"\"\"\n    Check if the input word is a palindrome using polynomial rolling hash.\n\n    Parameters:\n    - word: str - the input string to check\n\n    Returns:\n    - bool - True if palindrome, False otherwise\n    \"\"\"\n\n    base = 131  # a prime base for hashing\n    mod = 10**9 + 7  # large prime modulus to avoid overflow\n    n = len(word)\n\n    forward_hash = 0\n    backward_hash = 0\n    power = 1\n\n    for i in range(n):\n        forward_hash = (forward_hash * base + ord(word[i])) % mod\n        backward_hash = (backward_hash + ord(word[n - 1 - i]) * power) % mod\n        power = (power * base) % mod\n\n    return forward_hash == backward_hash\n```\n\n---\n\n### Example usage:\n\n```python\nprint(is_palindrome(\"racecar\"))  # True\nprint(is_palindrome(\"palindrome\"))  # False\nprint(is_palindrome(\"a\"))  # True\nprint(is_palindrome(\"\"))  # True (empty string is palindrome)\n```\n\n---\n\n### Notes:\n- This method treats the input as case-sensitive. You can adjust by normalizing case if needed.\n- The polynomial rolling hash is a classical hashing technique mainly used in string algorithms like Rabin-Karp.\n- This approach is novel for palindrome check compared to typical reverse or two-pointer methods and can be extended for advanced palindrome queries.",
+  "description": "Write a function to check if a word is a palindrome.",
+  "tags": [
+    "AI",
+    "chamber",
+    "level-0"
+  ],
+  "created_at": "2025-06-11T09:48:51.477369"
+}

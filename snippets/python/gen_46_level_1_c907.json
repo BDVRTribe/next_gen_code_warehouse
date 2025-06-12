@@ -1,0 +1,11 @@
+{
+  "title": "gen_46_level_1_c907",
+  "code": "Here's a revolutionary take on a palindrome checker in Python that goes beyond the basics:\n\n- It ignores case, spaces, punctuation.\n- It uses a clever recursive approach combined with a generator to explore characters.\n- It can handle Unicode characters properly.\n\n```python\nimport unicodedata\nimport string\n\ndef is_palindrome(word):\n    \"\"\"\n    Check if a word (string) is a palindrome,\n    ignoring case, spaces, punctuation, and Unicode normalization.\n    \"\"\"\n\n    # Normalize Unicode characters to a canonical form\n    normalized = unicodedata.normalize('NFKD', word)\n    \n    # Filter only alphanumeric characters (including Unicode letters/digits)\n    filtered_chars = (c.casefold() for c in normalized if c.isalnum())\n    \n    # Create a list from filtered characters for indexing\n    chars = list(filtered_chars)\n\n    def check(l, r):\n        if l >= r:\n            return True\n        if chars[l] != chars[r]:\n            return False\n        return check(l + 1, r - 1)\n\n    return check(0, len(chars) - 1)\n\n\n# Example usage:\nprint(is_palindrome(\"A man, a plan, a canal: Panama\"))  # True\nprint(is_palindrome(\"No lemon, no melon\"))              # True\nprint(is_palindrome(\"Hello\"))                            # False\nprint(is_palindrome(\"\u00e9t\u00e9\"))                              # True (Unicode palindrome)\n```\n\n**Explanation:**\n\n- `unicodedata.normalize` ensures accents and combined characters are treated uniformly.\n- `casefold()` is superior to `lower()` for case-insensitive matching, especially for Unicode.\n- The generator expression efficiently filters out unwanted characters.\n- The recursive `check` function compares characters from both ends inward.\n\nThis approach is compact, elegant, and robust for real-world palindrome checking.",
+  "description": "Write a function to check if a word is a palindrome.",
+  "tags": [
+    "AI",
+    "chamber",
+    "level-1"
+  ],
+  "created_at": "2025-06-11T09:48:06.748252"
+}

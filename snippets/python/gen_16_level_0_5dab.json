@@ -1,0 +1,11 @@
+{
+  "title": "gen_16_level_0_5dab",
+  "code": "Here\u2019s a fresh, unconventional approach to checking if a word is a palindrome \u2014 using a recursive generator to compare characters from the outside in, without slicing or reversing the string explicitly:\n\n```python\ndef is_palindrome(word):\n    def char_pairs(s, left=0, right=None):\n        if right is None:\n            right = len(s) - 1\n        if left >= right:\n            return\n        yield s[left], s[right]\n        yield from char_pairs(s, left + 1, right - 1)\n\n    return all(left == right for left, right in char_pairs(word))\n```\n\n**How it works:**\n\n- `char_pairs` recursively yields pairs of characters from the start and end moving inward.\n- `all()` confirms all pairs match.\n- If any pair mismatches, `all()` returns `False`.\n- No slicing, no reversal, just elegant recursion and generators.\n\nExample:\n\n```python\nprint(is_palindrome(\"racecar\"))  # True\nprint(is_palindrome(\"python\"))   # False\n```\n\nThis approach leverages generators and recursion for a clean, memory-efficient, and novel palindrome check.",
+  "description": "Write a function to check if a word is a palindrome.",
+  "tags": [
+    "AI",
+    "chamber",
+    "level-0"
+  ],
+  "created_at": "2025-06-11T09:45:18.848660"
+}
