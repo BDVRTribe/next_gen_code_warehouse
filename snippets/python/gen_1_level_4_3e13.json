@@ -1,0 +1,11 @@
+{
+  "title": "gen_1_level_4_3e13",
+  "code": "```python\ndef is_palindrome(word):\n    # Convert the word to lowercase to ignore case\n    word = word.lower()\n    \n    # Compare the word with its reverse\n    if word == word[::-1]:\n        return True\n    else:\n        return False\n\n# Example usage:\nprint(is_palindrome(\"Racecar\"))  # Should print True\nprint(is_palindrome(\"Hello\"))    # Should print False\n```",
+  "description": "Write a function to check if a word is a palindrome.",
+  "tags": [
+    "AI",
+    "chamber",
+    "level-4"
+  ],
+  "created_at": "2025-06-11T09:42:37.710369"
+}

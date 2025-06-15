@@ -1,0 +1,11 @@
+{
+  "title": "gen_22_level_0_7b02",
+  "code": "Here\u2019s a concise, elegant, and slightly novel approach to check if a word is a palindrome in Python. It leverages Python\u2019s slicing but also normalizes the input to be case-insensitive and ignores non-alphanumeric characters, making it more robust than a simple palindrome check.\n\n```python\nimport re\n\ndef is_palindrome(word: str) -> bool:\n    # Normalize: keep only alphanumeric, lowercase\n    cleaned = re.sub(r'[^a-z0-9]', '', word.lower())\n    # Check palindrome by comparing string to its reverse\n    return cleaned == cleaned[::-1]\n```\n\n**Example usage:**\n\n```python\nprint(is_palindrome(\"Racecar\"))        # True\nprint(is_palindrome(\"No lemon, no melon\"))  # True\nprint(is_palindrome(\"Hello\"))          # False\n```\n\nThis solution explores a broader concept of palindrome by ignoring case and non-alpha characters, making it more useful in real-world scenarios.",
+  "description": "Write a function to check if a word is a palindrome.",
+  "tags": [
+    "AI",
+    "chamber",
+    "level-0"
+  ],
+  "created_at": "2025-06-11T09:45:50.707062"
+}

@@ -19,3 +19,6 @@ venv/
 # Logs & misc
 *.log
 
+# Secrets
+phase_4/openai_key.txt
+

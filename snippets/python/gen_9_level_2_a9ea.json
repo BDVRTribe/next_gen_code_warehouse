@@ -1,0 +1,11 @@
+{
+  "title": "gen_9_level_2_a9ea",
+  "code": "Here's a simple yet \"cutting-edge\" approach to check if a word is a palindrome using Python's `functools.cache` decorator for memoization (a technique useful for speeding up repeated checks in larger workflows), combined with a domain-specific language (DSL)-style inner function for clarity:\n\n```python\nfrom functools import cache\n\ndef is_palindrome(word: str) -> bool:\n    \"\"\"\n    Check if a given word is a palindrome using a DSL-style approach\n    and memoization for efficiency on repeated calls.\n    \"\"\"\n    @cache\n    def check(left: int, right: int) -> bool:\n        # DSL-like recursion to check palindrome\n        if left >= right:\n            return True\n        if word[left] != word[right]:\n            return False\n        return check(left + 1, right - 1)\n    \n    return check(0, len(word) - 1)\n\n# Example usage:\nprint(is_palindrome(\"radar\"))  # True\nprint(is_palindrome(\"python\")) # False\n```\n\n**Explanation:**\n\n- Uses a recursive \"DSL\" (`check`) to express palindrome logic elegantly.\n- Applies `@cache` to memoize intermediate results, making repeated palindrome checking efficient.\n- This pattern could be extended for distributed or parallel processing if needed.\n\nLet me know if you want me to demonstrate distributed logic or model inference for this task!",
+  "description": "Write a function to check if a word is a palindrome.",
+  "tags": [
+    "AI",
+    "chamber",
+    "level-2"
+  ],
+  "created_at": "2025-06-11T09:44:33.762503"
+}

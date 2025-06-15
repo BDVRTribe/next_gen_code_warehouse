@@ -1,0 +1,18 @@
+{
+  "action_type": "edit",
+  "language": "python",
+  "filename": "test_snippet.json",
+  "snapshot_before": {
+    "name": "test_snippet",
+    "language": "python",
+    "tags": [
+      "test",
+      "demo"
+    ],
+    "description": "A test snippet.",
+    "code": "print('Hello, test!')",
+    "created_by": "test_runner",
+    "created_at": "2025-05-31T08:45:28.870886+00:00"
+  },
+  "timestamp": "2025-05-31T08:47:04.955381+00:00"
+}

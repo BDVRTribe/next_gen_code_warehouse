@@ -1,0 +1,11 @@
+{
+  "title": "gen_26_level_0_dcdd",
+  "code": "```python\ndef is_palindrome(word: str) -> bool:\n    # Normalize the word by removing non-alphanumeric characters and converting to lowercase\n    filtered = ''.join(ch.lower() for ch in word if ch.isalnum())\n    # Check if the filtered string is equal to its reverse\n    return filtered == filtered[::-1]\n```",
+  "description": "Write a function to check if a word is a palindrome.",
+  "tags": [
+    "AI",
+    "chamber",
+    "level-0"
+  ],
+  "created_at": "2025-06-11T09:46:08.494799"
+}

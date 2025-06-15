@@ -1,0 +1,11 @@
+{
+  "title": "gen_3_level_2_97f5",
+  "code": "Certainly! Below is a Python implementation using object-oriented programming, with clear reusable methods and algorithmic logic to check if a word is a palindrome.\n\n```python\nclass PalindromeChecker:\n    def __init__(self, word: str):\n        self.word = word.lower()  # Normalize to lowercase for case-insensitive check\n\n    def _clean_word(self) -> str:\n        \"\"\"\n        Remove non-alphanumeric characters to allow palindrome checking on phrases.\n        \"\"\"\n        return ''.join(char for char in self.word if char.isalnum())\n\n    def is_palindrome(self) -> bool:\n        \"\"\"\n        Check if the cleaned word is a palindrome.\n        \"\"\"\n        cleaned = self._clean_word()\n        return cleaned == cleaned[::-1]\n\n# Example usage\nif __name__ == \"__main__\":\n    words = [\"Racecar\", \"Hello\", \"A man, a plan, a canal: Panama\", \"No lemon, no melon\"]\n    for w in words:\n        checker = PalindromeChecker(w)\n        print(f\"'{w}' -> Palindrome? {checker.is_palindrome()}\")\n```\n\n### Explanation:\n- The `PalindromeChecker` class encapsulates the logic.\n- The constructor normalizes the word to lowercase.\n- `_clean_word` is a reusable internal method to remove any non-alphanumeric characters, making it robust for phrases.\n- `is_palindrome` method performs the palindrome check on the cleaned word.\n- Example usage demonstrates the class with some test cases.\n\nLet me know if you want this extended or adapted!",
+  "description": "Write a function to check if a word is a palindrome.",
+  "tags": [
+    "AI",
+    "chamber",
+    "level-2"
+  ],
+  "created_at": "2025-06-11T09:43:18.086854"
+}

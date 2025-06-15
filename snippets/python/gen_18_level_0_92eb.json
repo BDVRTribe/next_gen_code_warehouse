@@ -1,0 +1,11 @@
+{
+  "title": "gen_18_level_0_92eb",
+  "code": "Here's a concise and elegant Python function to check if a word is a palindrome:\n\n```python\ndef is_palindrome(word: str) -> bool:\n    return word == word[::-1]\n\n# Example usage:\nprint(is_palindrome(\"racecar\"))  # True\nprint(is_palindrome(\"hello\"))    # False\n```\n\nThis uses Python's slicing syntax to reverse the string and compares it to the original, returning `True` if they are the same.",
+  "description": "Write a function to check if a word is a palindrome.",
+  "tags": [
+    "AI",
+    "chamber",
+    "level-0"
+  ],
+  "created_at": "2025-06-11T09:45:30.452008"
+}

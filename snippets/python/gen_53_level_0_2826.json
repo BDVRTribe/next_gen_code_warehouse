@@ -1,0 +1,11 @@
+{
+  "title": "gen_53_level_0_2826",
+  "code": "Here's a highly innovative and flexible palindrome checker that goes beyond usual constraints. It:\n\n- Handles Unicode and emojis\n- Ignores spaces, punctuation, and case\n- Normalizes Unicode characters (like accented letters)\n- Uses no external libraries beyond Python standard library\n- Is a one-liner inside a function but fully explained and extensible\n\n```python\nimport unicodedata\nimport re\n\ndef is_palindrome(word: str) -> bool:\n    \"\"\"\n    Check if the input string is a palindrome, ignoring case, spaces, punctuation,\n    and normalizing unicode characters.\n\n    Examples:\n    >>> is_palindrome(\"A man, a plan, a canal: Panama\")\n    True\n    >>> is_palindrome(\"No lemon, no melon\")\n    True\n    >>> is_palindrome(\"hello\")\n    False\n    >>> is_palindrome(\"\ud83e\udde1racecar\ud83e\udde1\")\n    True\n    \"\"\"\n    # Normalize unicode characters (e.g., \u00e9 -> e + \u00b4)\n    normalized = unicodedata.normalize('NFKD', word)\n    # Remove non-alphanumeric characters (including emojis, keep them as letters/numbers)\n    filtered = ''.join(ch for ch in normalized if ch.isalnum())\n    # Normalize case\n    cleaned = filtered.casefold()\n    # Check palindrome by comparing string with its reverse\n    return cleaned == cleaned[::-1]\n```\n\nThis function is robust for many real-world palindrome checks and embraces the complexity of natural language and emojis.",
+  "description": "Write a function to check if a word is a palindrome.",
+  "tags": [
+    "AI",
+    "chamber",
+    "level-0"
+  ],
+  "created_at": "2025-06-11T09:48:56.948445"
+}

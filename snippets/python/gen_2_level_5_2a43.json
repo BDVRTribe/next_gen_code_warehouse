@@ -1,0 +1,10 @@
+{
+  "title": "gen_2_level_5_2a43",
+  "code": "def fibonacci_sequence(n):\n    sequence = [0, 1]\n    while sequence[-1] < n:\n        next_number = sequence[-1] + sequence[-2]\n        if next_number > n:\n            break\n        sequence.append(next_number)\n    return sequence\n\nprint(fibonacci_sequence(10))  # [0, 1, 1, 2, 3, 5, 8]",
+  "description": "Write a Python function that returns the Fibonacci sequence up to a given number.",
+  "tags": [
+    "generated",
+    "fibonacci"
+  ],
+  "created_at": "2025-06-11T09:11:16.808462"
+}

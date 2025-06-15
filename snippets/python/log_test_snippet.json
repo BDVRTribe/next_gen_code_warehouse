@@ -1,0 +1,13 @@
+{
+  "name": "log_test_snippet",
+  "language": "python",
+  "tags": [
+    "log",
+    " test",
+    " cli"
+  ],
+  "description": "This is to test logging integration",
+  "code": "print(\"Hello from logger test\")",
+  "created_by": "anonymous",
+  "created_at": "2025-05-30T09:43:10.047090+00:00"
+}

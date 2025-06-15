@@ -1,0 +1,11 @@
+{
+  "title": "gen_6_level_3_e5b7",
+  "code": "Here's a Python function to check if a word is a palindrome, using a decorator to add some additional functionality (e.g., timing the check). This demonstrates advanced features like decorators and concurrency (using threading) to run multiple palindrome checks concurrently.\n\n```python\nimport time\nfrom functools import wraps\nfrom concurrent.futures import ThreadPoolExecutor\n\ndef timeit(func):\n    \"\"\"Decorator to measure the execution time of a function.\"\"\"\n    @wraps(func)\n    def wrapper(*args, **kwargs):\n        start = time.perf_counter()\n        result = func(*args, **kwargs)\n        end = time.perf_counter()\n        print(f\"Function '{func.__name__}' took {end - start:.6f} seconds\")\n        return result\n    return wrapper\n\n@timeit\ndef is_palindrome(word: str) -> bool:\n    \"\"\"\n    Check if a word is a palindrome.\n\n    This function ignores case and non-alphanumeric characters.\n    \"\"\"\n    filtered = ''.join(c.lower() for c in word if c.isalnum())\n    return filtered == filtered[::-1]\n\ndef check_palindromes(words):\n    \"\"\"\n    Check a list of words concurrently for palindrome status.\n\n    Returns a dictionary mapping word -> bool.\n    \"\"\"\n    with ThreadPoolExecutor() as executor:\n        results = executor.map(is_palindrome, words)\n    return dict(zip(words, results))\n\nif __name__ == \"__main__\":\n    test_words = [\"Racecar\", \"Python\", \"Level\", \"OpenAI\", \"Deified\", \"Noon\", \"Palindrome\"]\n    results = check_palindromes(test_words)\n    for word, is_palin in results.items():\n        print(f\"'{word}': {'Palindrome' if is_palin else 'Not a palindrome'}\")\n```\n\n### Explanation:\n- The `is_palindrome` function normalizes the input by removing non-alphanumeric characters and ignoring case.\n- The `timeit` decorator measures how long the palindrome check takes.\n- The `check_palindromes` function uses a thread pool executor to check multiple words concurrently.\n- This approach showcases decorators, string processing, and concurrency in a clean, efficient way.",
+  "description": "Write a function to check if a word is a palindrome.",
+  "tags": [
+    "AI",
+    "chamber",
+    "level-3"
+  ],
+  "created_at": "2025-06-11T09:44:20.945229"
+}

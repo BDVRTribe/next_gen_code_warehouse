@@ -1,0 +1,11 @@
+{
+  "title": "gen_41_level_0_eb7e",
+  "code": "Here's a concise and efficient Python function to check if a word is a palindrome:\n\n```python\ndef is_palindrome(word: str) -> bool:\n    return word == word[::-1]\n```\n\n**Explanation:**\n- The function compares the given word with its reverse (`word[::-1]`).\n- If both are equal, the word is a palindrome and the function returns `True`; otherwise, `False`.\n\n**Example usage:**\n```python\nprint(is_palindrome(\"racecar\"))  # True\nprint(is_palindrome(\"python\"))   # False\n```\n\n---\n\nIf you want a more advanced variant that ignores case and non-alphanumeric characters, here\u2019s an enhanced version:\n\n```python\nimport re\n\ndef is_palindrome(word: str) -> bool:\n    # Normalize: remove non-alphanumeric and convert to lowercase\n    cleaned = re.sub(r'[^a-z0-9]', '', word.lower())\n    return cleaned == cleaned[::-1]\n```\n\nThis version treats phrases like `\"A man, a plan, a canal: Panama\"` as palindromes.",
+  "description": "Write a function to check if a word is a palindrome.",
+  "tags": [
+    "AI",
+    "chamber",
+    "level-0"
+  ],
+  "created_at": "2025-06-11T09:47:46.390606"
+}

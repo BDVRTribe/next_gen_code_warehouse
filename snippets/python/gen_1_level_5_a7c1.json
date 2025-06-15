@@ -1,0 +1,11 @@
+{
+  "title": "gen_1_level_5_a7c1",
+  "code": "Sure! Here's a simple Python function to check if a word is a palindrome:\n\n```python\ndef is_palindrome(word):\n    # Convert the word to lowercase to ignore case differences\n    word = word.lower()\n    \n    # Compare the word with its reverse\n    if word == word[::-1]:\n        return True\n    else:\n        return False\n\n# Example usage:\nprint(is_palindrome(\"Racecar\"))  # True\nprint(is_palindrome(\"hello\"))    # False\n```\n\nThis function converts the word to lowercase, reverses it, and checks if both are the same. If yes, it returns True; otherwise, it returns False.",
+  "description": "Write a function to check if a word is a palindrome.",
+  "tags": [
+    "AI",
+    "chamber",
+    "level-5"
+  ],
+  "created_at": "2025-06-11T09:38:44.304709"
+}

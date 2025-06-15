@@ -1,0 +1,10 @@
+{
+  "title": "gen_5_level_2_ba9a",
+  "code": "class PalindromeChecker:\n    def __init__(self, word):\n        self.word = word\n\n    def is_palindrome(self):\n        return self.word == self.word[::-1]\n\ndef check_palindrome(word):\n    checker = PalindromeChecker(word)\n    return checker.is_palindrome()",
+  "description": "Write a function to check if a word is a palindrome.",
+  "tags": [
+    "generated",
+    "fibonacci"
+  ],
+  "created_at": "2025-06-11T09:27:33.137315"
+}

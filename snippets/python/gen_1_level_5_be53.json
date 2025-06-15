@@ -1,0 +1,10 @@
+{
+  "title": "gen_1_level_5_be53",
+  "code": "def fibonacci_sequence(n):\n    result = []\n    a, b = 0, 1\n    while a < n:\n        result.append(a)\n        a, b = b, a+b\n    return result\n\nprint(fibonacci_sequence(10))",
+  "description": "Write a Python function that returns the Fibonacci sequence up to a given number.",
+  "tags": [
+    "generated",
+    "fibonacci"
+  ],
+  "created_at": "2025-06-11T09:09:03.008596"
+}

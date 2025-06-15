@@ -1,0 +1,10 @@
+{
+  "title": "gen_1_level_5_2455",
+  "code": "def is_palindrome(word):\n    return word == word[::-1]",
+  "description": "Write a function to check if a word is a palindrome.",
+  "tags": [
+    "generated",
+    "fibonacci"
+  ],
+  "created_at": "2025-06-11T09:27:03.616704"
+}

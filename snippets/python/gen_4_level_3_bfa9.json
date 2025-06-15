@@ -1,0 +1,10 @@
+{
+  "title": "gen_4_level_3_bfa9",
+  "code": "def fibonacci_sequence(n):\n    sequence = []\n    a, b = 0, 1\n    while a < n:\n        sequence.append(a)\n        a, b = b, a+b\n    return sequence\n\ntry:\n    num = int(input(\"Enter a number: \"))\n    print(fibonacci_sequence(num))\nexcept ValueError:\n    print(\"Invalid input! Please enter a number.\")",
+  "description": "Write a Python function that returns the Fibonacci sequence up to a given number.",
+  "tags": [
+    "generated",
+    "fibonacci"
+  ],
+  "created_at": "2025-06-11T09:13:37.327768"
+}

@@ -1,0 +1,11 @@
+{
+  "title": "gen_11_level_0_1e9d",
+  "code": "To incorporate a cutting-edge technique like a domain-specific language (DSL) for palindrome checking in Python, I'll define a small internal DSL using a class that encapsulates palindrome logic in a fluent interface style. This approach is more advanced than a simple function and can be extended easily.\n\nHere\u2019s an elegant and extensible palindrome checker using a small DSL pattern:\n\n```python\nclass PalindromeDSL:\n    def __init__(self, word):\n        self.word = word\n\n    def normalize(self):\n        # Normalize word: lowercase and filter only alphanumeric characters\n        self.word = ''.join(ch.lower() for ch in self.word if ch.isalnum())\n        return self\n\n    def is_palindrome(self):\n        # Check palindrome by comparing string with its reverse\n        return self.word == self.word[::-1]\n\n# Usage:\ndef is_palindrome(word):\n    return PalindromeDSL(word).normalize().is_palindrome()\n\n# Example test\nif __name__ == \"__main__\":\n    test_words = [\"Racecar\", \"Hello\", \"A man, a plan, a canal, Panama\"]\n    for w in test_words:\n        print(f\"'{w}' palindrome? {is_palindrome(w)}\")\n```\n\n**Explanation:**\n\n- The `PalindromeDSL` class acts as a mini DSL for palindrome operations.\n- The `normalize` method prepares the string (lowercase, alphanumeric only) for robust checking.\n- The `is_palindrome` method performs the actual palindrome check.\n- The fluent interface allows chaining calls (`PalindromeDSL(word).normalize().is_palindrome()`).\n- This design enables easy extension, e.g., adding more normalization or palindrome-related methods later.\n\nThis solution goes beyond a trivial approach and uses a DSL-inspired pattern, meeting the instruction to incorporate cutting-edge techniques.",
+  "description": "Write a function to check if a word is a palindrome.",
+  "tags": [
+    "AI",
+    "chamber",
+    "level-0"
+  ],
+  "created_at": "2025-06-11T09:44:47.288531"
+}

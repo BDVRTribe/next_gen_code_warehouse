@@ -1,0 +1,11 @@
+{
+  "title": "snippet_dec926c3",
+  "code": "def is_leap_year(year):\n    \"\"\"\n    Returns True if the given year is a leap year, False otherwise.\n    Leap year rules:\n    - Year divisible by 4 is a leap year,\n    - Except if divisible by 100, then not a leap year,\n    - Except if divisible by 400, then it is a leap year.\n    \"\"\"\n    if (year % 400) == 0:\n        return True\n    if (year % 100) == 0:\n        return False\n    if (year % 4) == 0:\n        return True\n    return False\n\ndef main():\n    try:\n        year_input = input(\"Enter a year to check if it is a leap year: \")\n        year = int(year_input)\n        if year <= 0:\n            print(\"Please enter a positive integer for the year.\")\n            return\n        if is_leap_year(year):\n            print(f\"{year} is a leap year.\")\n        else:\n            print(f\"{year} is not a leap year.\")\n    except ValueError:\n        print(\"Invalid input. Please enter a valid integer year.\")\n\nif __name__ == \"__main__\":\n    main()",
+  "description": "Write a program that checks if a given year is a leap year.",
+  "tags": [
+    "AI",
+    "chamber",
+    "level-4"
+  ],
+  "created_at": "2025-06-12T09:28:23.005510"
+}
