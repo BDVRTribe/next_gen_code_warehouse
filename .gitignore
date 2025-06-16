@@ -22,3 +22,6 @@ venv/
 # Secrets
 phase_4/openai_key.txt
 
+phase_4/run_fake_experiment.py
+phase_4/run_gpt_experiment.py
+
